@@ -12,8 +12,8 @@ export const Form: FC = () => {
     const [rating, setRating] = useState(0)
     const [description, setDescription] = useState('')
 
-    const { connection } = useConnection();
-    const { publicKey, sendTransaction } = useWallet();
+    const {connection} = useConnection();
+    const {publicKey, sendTransaction} = useWallet();
 
     const handleSubmit = (event: any) => {
         event.preventDefault()
@@ -27,9 +27,11 @@ export const Form: FC = () => {
             return
         }
 
+        //buffer representing the instruction data
         const buffer = movie.serialize()
         const transaction = new web3.Transaction()
 
+        //pda is the address to the account where the data will be stored
         const [pda] = await web3.PublicKey.findProgramAddress(
             [publicKey.toBuffer(), Buffer.from(movie.title)],// new TextEncoder().encode(movie.title)],
             new web3.PublicKey(MOVIE_REVIEW_PROGRAM_ID)

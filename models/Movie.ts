@@ -20,8 +20,8 @@ export class Movie {
 
     borshInstructionSchema = borsh.struct([
         borsh.u8('variant'),
-        borsh.str('title'),
         borsh.u8('rating'),
+        borsh.str('title'),
         borsh.str('description'),
     ])
 
